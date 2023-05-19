@@ -3,7 +3,7 @@ const ConfigCTA = {};
 ConfigCTA.CTA_MESSAGE_REQUEST_ERROR = {
   title: "Sorry",
   message:
-    "Terjadi kesalahan saat memproses data. Silahkan periksa kembali informasi yang Anda masukkan dan pastikan semuanya diisi dengan benar",
+    "Terjadi kesalahan saat memproses data. Silahkan periksa kembali informasi yang Anda masukkan dan pastikan semuanya diisi dengan benar.",
 };
 
 ConfigCTA.CTA_MESSAGE_SIGNIN_ERROR = {
