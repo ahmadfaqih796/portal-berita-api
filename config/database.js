@@ -43,6 +43,7 @@ const operatorsAliases = {
 
 const sequelizeConfig = {
   dialect: "mysql",
+  host: "localhost",
   logging: false,
   operatorsAliases,
   define: {
@@ -60,16 +61,7 @@ const sequelizeConfig = {
 //   dialect: "mysql",
 // });
 
-const sequelize = new Sequelize(
-  "db_berita",
-  "root",
-  "",
-  {
-    host: "localhost",
-    dialect: "mysql",
-  },
-  sequelizeConfig
-);
+const sequelize = new Sequelize("db_berita", "root", "", sequelizeConfig);
 
 if (DB_SYNC === "true") {
   (async () => {
