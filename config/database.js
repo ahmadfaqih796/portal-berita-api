@@ -56,11 +56,6 @@ const sequelizeConfig = {
   },
 };
 
-// const sequelize = new Sequelize("db_berita", "root", "", {
-//   host: "localhost",
-//   dialect: "mysql",
-// });
-
 const sequelize = new Sequelize("db_berita", "root", "", sequelizeConfig);
 
 if (DB_SYNC === "true") {
