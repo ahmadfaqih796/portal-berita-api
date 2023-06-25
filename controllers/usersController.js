@@ -1,7 +1,7 @@
 const { Users } = require("../models");
 
 // Mendapatkan semua pengguna
-const getAllUserss = async (req, res) => {
+const getAllUsers = async (req, res) => {
   try {
     const users = await Users.findAll();
     res.status(200).json(users);
