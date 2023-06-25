@@ -1,10 +1,10 @@
 const { Sequelize } = require("sequelize");
 
-const { DB_SYNC } = process.env;
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT, DB_SYNC } =
+  process.env;
 const { Op } = Sequelize;
 
 const operatorsAliases = {
-  // Daftar operatorAliases Anda
   $eq: Op.eq,
   $ne: Op.ne,
   $gte: Op.gte,
@@ -43,7 +43,7 @@ const operatorsAliases = {
 
 const sequelizeConfig = {
   dialect: "mysql",
-  host: "localhost",
+  host: DB_HOST,
   logging: false,
   operatorsAliases,
   define: {
@@ -56,13 +56,13 @@ const sequelizeConfig = {
   },
 };
 
-const sequelize = new Sequelize("db_berita", "root", "", sequelizeConfig);
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, sequelizeConfig);
 
 if (DB_SYNC === "true") {
   (async () => {
     try {
       await sequelize.sync({ alter: true });
-      console.log("Table synchronized successfully.");
+      console.log("Tabel berhasil disinkronkan.");
     } catch (error) {
       console.error("Error synchronizing table:", error);
     }
