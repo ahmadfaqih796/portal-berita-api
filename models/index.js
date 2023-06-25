@@ -1,16 +1,10 @@
-// models/index.js
-
 const Sequelize = require("sequelize");
 const UserModel = require("./users");
 const connection = require("../config/database");
 
-// const sequelize = new Sequelize("database", "username", "password", {
-//   // konfigurasi koneksi ke database
-// });
-
 const models = {
-  User: UserModel(connection, Sequelize.DataTypes),
-  // Tambahkan model-model lain di sini jika diperlukan
+  // Tambahkan model-model lain di sini
+  Users: UserModel(connection, Sequelize.DataTypes),
 };
 
 Object.values(models)
