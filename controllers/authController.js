@@ -1,9 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { Users } = require("../models");
-
-const jwtSecret =
-  "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY4NzcwMTI4OSwiaWF0IjoxNjg3NzAxMjg5fQ.WIPnvWSEYmUOyFzYTt0P92dOoVFQZaryU-0m6g1CeXk";
+const { SECRET_KEY } = process.env;
 
 const register = async (req, res) => {
   try {
@@ -30,7 +28,10 @@ const login = async (req, res) => {
     if (!passwordMatch) {
       return res.status(401).json({ message: "Invalid password." });
     }
-    const token = jwt.sign({ id: user.id, username: user.username }, jwtSecret);
+    const token = jwt.sign(
+      { id: user.id, username: user.username },
+      SECRET_KEY
+    );
     res.status(200).json({ token });
   } catch (error) {
     console.error(error);
