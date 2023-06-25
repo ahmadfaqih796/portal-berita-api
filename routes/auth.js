@@ -10,11 +10,11 @@ router.post("/register", (req, res) => {
 
   User.create({ username, password })
     .then(() => {
-      res.status(201).json({ message: "User registered successfully." });
+      res.status(201).json({ message: "Berhasil register user" });
     })
     .catch((err) => {
       console.error("Error registering user:", err);
-      res.status(500).json({ error: "Failed to register user." });
+      res.status(500).json({ error: "Gagal register user" });
     });
 });
 
@@ -25,18 +25,18 @@ router.post("/login", (req, res) => {
   User.findOne({ where: { username } })
     .then((user) => {
       if (!user) {
-        return res.status(404).json({ error: "User not found." });
+        return res.status(404).json({ error: "User tidak ditemukan" });
       }
 
       if (user.password !== password) {
-        return res.status(401).json({ error: "Invalid password." });
+        return res.status(401).json({ error: "Pasword tidak valid" });
       }
 
-      res.json({ message: "Login successful." });
+      res.json({ message: "Berhasil login" });
     })
     .catch((err) => {
       console.error("Error logging in:", err);
-      res.status(500).json({ error: "Failed to log in." });
+      res.status(500).json({ error: "Gagal login" });
     });
 });
 
