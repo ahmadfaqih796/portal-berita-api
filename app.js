@@ -5,6 +5,7 @@ const express = require("express");
 const { connection } = require("./models");
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/auth");
+const usersRoutes = require("./routes/users");
 const { authenticateToken } = require("./middlewares/authMiddleware");
 
 const app = express();
@@ -12,9 +13,11 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Menambahkan route untuk pengguna
 app.use("/auth", authRoutes);
+app.use("/users", usersRoutes);
 
-// Contoh route yang membutuhkan autentikasi
+// route yang membutuhkan autentikasi
 app.get("/protected", authenticateToken, (req, res) => {
   res.json({ message: "Protected route accessed successfully." });
 });
