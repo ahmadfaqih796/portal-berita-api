@@ -1,17 +1,26 @@
 const { Users } = require("../models");
 
-// Mendapatkan semua pengguna
 const getAllUsers = async (req, res) => {
   try {
-    const users = await Users.findAll();
-    res.status(200).json(users);
+    const { page = 1, limit = 10 } = req.query;
+    const offset = (page - 1) * limit;
+    const total = await Users.count();
+    const users = await Users.findAll({
+      offset,
+      limit: parseInt(limit),
+    });
+    res.status(200).json({
+      total,
+      limit: parseInt(limit),
+      skip: offset,
+      data: users,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
 
-// Mendapatkan satu pengguna berdasarkan ID
 const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -26,22 +35,17 @@ const getUserById = async (req, res) => {
   }
 };
 
-// Memperbarui pengguna berdasarkan ID
 const updateUserById = async (req, res) => {
   try {
     const { id } = req.params;
     const { username, password } = req.body;
-
     const user = await Users.findByPk(id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
-    // Update data pengguna
     user.username = username;
     user.password = password;
     await user.save();
-
     res.status(200).json({ message: "User updated successfully" });
   } catch (error) {
     console.error(error);
@@ -49,19 +53,14 @@ const updateUserById = async (req, res) => {
   }
 };
 
-// Menghapus pengguna berdasarkan ID
 const deleteUserById = async (req, res) => {
   try {
     const { id } = req.params;
-
     const user = await Users.findByPk(id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
-    // Hapus pengguna
     await user.destroy();
-
     res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     console.error(error);
