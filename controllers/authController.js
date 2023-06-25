@@ -32,7 +32,9 @@ const login = async (req, res) => {
       { id: user.id, username: user.username },
       SECRET_KEY
     );
-    res.status(200).json({ token });
+    res
+      .status(200)
+      .json({ message: "Anda berhasil login", data: user, token: token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
