@@ -1,5 +1,3 @@
-// controllers/userController.js
-
 const { Users } = require("../models");
 
 // Mendapatkan semua pengguna
