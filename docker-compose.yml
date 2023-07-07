@@ -8,8 +8,6 @@ services:
       - 8080:3000
     depends_on:
       - db
-    networks:
-      - mynetwork
 
   db:
     image: mysql:latest
@@ -18,8 +16,4 @@ services:
       MYSQL_DATABASE: db_berita
     ports:
       - 7000:7000
-    networks:
-      - mynetwork
-
-networks:
-  mynetwork:
+    
