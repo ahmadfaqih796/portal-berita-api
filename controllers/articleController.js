@@ -21,4 +21,14 @@ const getAllArticle = async (req, res) => {
   }
 };
 
-module.exports = { getAllArticle };
+const createArticle = async (req, res) => {
+  try {
+    const { judul, deskripsi } = req.body;
+    console.log("kakakak", judul);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = { getAllArticle, createArticle };
