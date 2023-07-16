@@ -6,7 +6,7 @@ const connection = require("../config/database");
 const models = {
   // Tambahkan model-model lain di sini
   Users: UserModel(connection, Sequelize.DataTypes),
-  Users: ArticleModel(connection, Sequelize.DataTypes),
+  Article: ArticleModel(connection, Sequelize.DataTypes),
 };
 
 Object.values(models)

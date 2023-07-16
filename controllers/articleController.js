@@ -1,0 +1,1 @@
+const { Article } = require("../models");
