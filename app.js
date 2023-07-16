@@ -4,6 +4,7 @@ const { connection } = require("./models");
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/auth");
 const usersRoutes = require("./routes/users");
+const articleRoutes = require("./routes/article");
 const { authenticateToken } = require("./middlewares/authMiddleware");
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 // Menambahkan route untuk pengguna
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
+app.use("/article", articleRoutes);
 
 // route yang membutuhkan autentikasi
 app.get("/protected", authenticateToken, (req, res) => {

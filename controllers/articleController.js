@@ -5,7 +5,7 @@ const getAllArticle = async (req, res) => {
     const { page = 1, limit = 10 } = req.query;
     const offset = (page - 1) * limit;
     const total = await Article.count();
-    const users = await Article.findAll({
+    const article = await Article.findAll({
       offset,
       limit: parseInt(limit),
     });
@@ -13,7 +13,7 @@ const getAllArticle = async (req, res) => {
       total,
       limit: parseInt(limit),
       skip: offset,
-      data: users,
+      data: article,
     });
   } catch (error) {
     console.error(error);
