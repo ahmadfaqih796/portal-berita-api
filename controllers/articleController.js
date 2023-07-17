@@ -51,4 +51,27 @@ const createArticle = async (req, res) => {
   }
 };
 
-module.exports = { getAllArticle, getArticleById, createArticle };
+const updateArticleById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { judul, deskripsi } = req.body;
+    const article = await Users.findByPk(id);
+    if (!article) {
+      return res.status(404).json({ message: "Article not found" });
+    }
+    article.judul = judul;
+    article.deskripsi = deskripsi;
+    await article.save();
+    res.status(200).json({ message: "Article updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = {
+  getAllArticle,
+  getArticleById,
+  createArticle,
+  updateArticleById,
+};
