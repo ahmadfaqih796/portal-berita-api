@@ -62,7 +62,7 @@ const updateArticleById = async (req, res) => {
     article.judul = judul;
     article.deskripsi = deskripsi;
     await article.save();
-    res.status(200).json({ message: "Article updated successfully" });
+    res.status(200).json({ message: "Article updated successfull" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
