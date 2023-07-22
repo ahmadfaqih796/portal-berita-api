@@ -9,5 +9,6 @@ router.use(authenticateToken);
 
 // Rute untuk mendapatkan semua pengguna
 router.get("/", articleController.getAllArticle);
+router.post("/", articleController.createArticle);
 
 module.exports = router;

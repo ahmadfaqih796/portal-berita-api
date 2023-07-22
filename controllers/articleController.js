@@ -24,7 +24,13 @@ const getAllArticle = async (req, res) => {
 const createArticle = async (req, res) => {
   try {
     const { judul, deskripsi } = req.body;
-    console.log("kakakak", judul);
+    const article = await Article.create({
+      judul: judul,
+      deskripsi: deskripsi,
+    });
+    res
+      .status(200)
+      .json({ message: "Berhasil membuat article", data: article });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
