@@ -21,9 +21,12 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   // Definisikan hubungan dengan model-model lain di sini jika diperlukan
-  // Users.associate = (models) => {
-  //   ...
-  // };
+  Users.associate = (models) => {
+    Users.hasMany(models.Article, {
+      foreignKey: "id_user",
+      as: "created_by",
+    });
+  };
 
   return Users;
 };

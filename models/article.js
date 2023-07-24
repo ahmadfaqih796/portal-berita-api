@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       deskripsi: {
         type: DataTypes.STRING,
       },
+      id_user: {
+        type: DataTypes.INTEGER,
+      },
     },
     {
       tableName: "article", // Nama tabel di database
