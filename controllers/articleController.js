@@ -55,14 +55,29 @@ const updateArticleById = async (req, res) => {
   try {
     const { id } = req.params;
     const { judul, deskripsi } = req.body;
-    const article = await Users.findByPk(id);
+    const article = await Article.findByPk(id);
     if (!article) {
       return res.status(404).json({ message: "Article not found" });
     }
     article.judul = judul;
     article.deskripsi = deskripsi;
     await article.save();
-    res.status(200).json({ message: "Article updated successfull" });
+    res.status(200).json({ message: "Article updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const deleteArticleById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const article = await Article.findByPk(id);
+    if (!article) {
+      return res.status(404).json({ message: "Article not found" });
+    }
+    await article.destroy();
+    res.status(200).json({ message: "Article deleted successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -74,4 +89,5 @@ module.exports = {
   getArticleById,
   createArticle,
   updateArticleById,
+  deleteArticleById,
 };
