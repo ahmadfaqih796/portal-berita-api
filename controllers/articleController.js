@@ -25,7 +25,10 @@ const getAllArticle = async (req, res) => {
       }),
     };
 
-    const total = await Article.count({ where: whereCondition || includeData });
+    const total = await Article.count({
+      where: whereCondition,
+      include: [includeData],
+    });
     const article = await Article.findAll({
       where: whereCondition,
       include: [includeData],
