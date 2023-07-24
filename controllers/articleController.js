@@ -21,6 +21,20 @@ const getAllArticle = async (req, res) => {
   }
 };
 
+const getArticleById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const article = await Article.findByPk(id);
+    if (!article) {
+      return res.status(404).json({ message: "Article not found" });
+    }
+    res.status(200).json(article);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 const createArticle = async (req, res) => {
   try {
     const { judul, deskripsi } = req.body;
@@ -37,4 +51,4 @@ const createArticle = async (req, res) => {
   }
 };
 
-module.exports = { getAllArticle, createArticle };
+module.exports = { getAllArticle, getArticleById, createArticle };
