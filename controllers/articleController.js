@@ -2,10 +2,19 @@ const { Article } = require("../models");
 
 const getAllArticle = async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req.query;
+    const { page = 1, limit = 10, search } = req.query;
     const offset = (page - 1) * limit;
-    const total = await Article.count();
+    const whereCondition = search
+      ? {
+          $or: [
+            { judul: { $like: `%${search}%` } },
+            { deskripsi: { $like: `%${search}%` } },
+          ],
+        }
+      : {};
+    const total = await Article.count({ where: whereCondition });
     const article = await Article.findAll({
+      where: whereCondition,
       offset,
       limit: parseInt(limit),
     });
