@@ -1,4 +1,4 @@
-const { Article } = require("../models");
+const { Article, Users } = require("../models");
 
 const getAllArticle = async (req, res) => {
   try {
@@ -15,6 +15,12 @@ const getAllArticle = async (req, res) => {
     const total = await Article.count({ where: whereCondition });
     const article = await Article.findAll({
       where: whereCondition,
+      include: [
+        {
+          model: Users,
+          as: "created_by",
+        },
+      ],
       offset,
       limit: parseInt(limit),
     });
