@@ -19,6 +19,7 @@ const getAllArticle = async (req, res) => {
         {
           model: Users,
           as: "created_by",
+          attributes: ["id", "name"],
         },
       ],
       offset,
