@@ -2,7 +2,7 @@ const { Article, Users } = require("../models");
 
 const getAllArticle = async (req, res) => {
   try {
-    const { page = 1, limit = 10, search } = req.query;
+    const { page = 1, limit = 10, search, name } = req.query;
     const offset = (page - 1) * limit;
     const whereCondition = search
       ? {
@@ -12,16 +12,23 @@ const getAllArticle = async (req, res) => {
           ],
         }
       : {};
-    const total = await Article.count({ where: whereCondition });
+    const includeData = {
+      model: Users,
+      as: "created_by",
+      attributes: ["id", "name"],
+      ...(name && {
+        where: {
+          name: {
+            $like: `%${name}%`,
+          },
+        },
+      }),
+    };
+
+    const total = await Article.count({ where: whereCondition || includeData });
     const article = await Article.findAll({
       where: whereCondition,
-      include: [
-        {
-          model: Users,
-          as: "created_by",
-          attributes: ["id", "name"],
-        },
-      ],
+      include: [includeData],
       offset,
       limit: parseInt(limit),
     });
