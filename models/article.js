@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       deskripsi: {
         type: DataTypes.STRING,
       },
+      kategori: {
+        type: DataTypes.STRING,
+      },
       id_user: {
         type: DataTypes.INTEGER,
       },

@@ -12,7 +12,7 @@ const getAllArticle = async (req, res) => {
           ],
         }
       : {};
-    const includeData = {
+    const includeUserData = {
       model: Users,
       as: "created_by",
       attributes: ["id", "name"],
@@ -27,11 +27,11 @@ const getAllArticle = async (req, res) => {
 
     const total = await Article.count({
       where: whereCondition,
-      include: [includeData],
+      include: [includeUserData],
     });
     const article = await Article.findAll({
       where: whereCondition,
-      include: [includeData],
+      include: [includeUserData],
       offset,
       limit: parseInt(limit),
     });
